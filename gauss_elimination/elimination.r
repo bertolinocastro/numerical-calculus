@@ -12,6 +12,22 @@ swap <- function(A, x, y){
 	A[[y]] <- tmp
 }
 
+sq <- function(from,to,by){
+	sq <- NULL
+	cat('teste: ',(to-from)*by>0)
+	if((to-from)*by>0){ # creating sequence only if the step allows it
+		i <- 0
+		cat('teste2: ',(from+i*by)<to)
+		# TODO: criar apenas um vetor de i's e fazer a multilpicacao dele por by e depois somar tudo com from
+		while(from+i*by<to){
+			sq <- c(sq,from+i*by)
+			cat('entrei',sq)
+			i <- i + 1
+		}
+	}
+	sq
+}
+
 # elimination
 elimination <- function(A){
 	i <- 1
@@ -65,6 +81,18 @@ result <- function(A){
 	}
 	X
 }
+
+result <- function(A){
+	m <- nrow(A)
+	n <- ncol(A)
+	X <- matrix()
+
+	for (i in m:1){
+		X[[i]] <- (A[[i,n]] - sum(A[i,m:(i+1)]*X[m:(i+1)]))
+	}
+	X
+}
+
 
 # creating a augmented matrix (4x4 angular coeficients and 4x1 linear coeficients)
 mat <- matrix(
