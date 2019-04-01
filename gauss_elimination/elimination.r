@@ -12,20 +12,16 @@ swap <- function(A, x, y){
 	A[[y]] <- tmp
 }
 
+# seq wrapper
+# creating a sequence generator similar to Python's range
+# as R's "seq" isn't working properly.
 sq <- function(from,to,by){
-	sq <- NULL
-	cat('teste: ',(to-from)*by>0)
+	ab <- NULL
 	if((to-from)*by>0){ # creating sequence only if the step allows it
-		i <- 0
-		cat('teste2: ',(from+i*by)<to)
-		# TODO: criar apenas um vetor de i's e fazer a multilpicacao dele por by e depois somar tudo com from
-		while(from+i*by<to){
-			sq <- c(sq,from+i*by)
-			cat('entrei',sq)
-			i <- i + 1
-		}
+		ab <- seq(from, to, by)
+		length(ab) <- length(ab) - 1 # discarding last index
 	}
-	sq
+	ab
 }
 
 # elimination
@@ -103,8 +99,13 @@ mat <- matrix(
 	),nrow=3,ncol=4,byrow=TRUE
 )
 
-cat('Initial matrix:\n');print(mat);cat('\n\n')
-mat <- elimination(mat)
-cat('Eliminated matrix:\n');print(mat);cat('\n\n')
-result(mat)
-cat('Result matrix:\n');print(mat);cat('\n\n')
+print(sq(3,1,-1))
+print(sq(1,3,-1))
+print(sq(3,1,1))
+print(sq(1,3,1))
+
+# cat('Initial matrix:\n');print(mat);cat('\n\n')
+# mat <- elimination(mat)
+# cat('Eliminated matrix:\n');print(mat);cat('\n\n')
+# result(mat)
+# cat('Result matrix:\n');print(mat);cat('\n\n')
