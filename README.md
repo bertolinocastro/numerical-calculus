@@ -1,6 +1,8 @@
 Repository Tree:
 
 ```
+├─ gauss_elimination
+│  └─ elimination.r
 ├─ pure_R
 │  ├─ ex1.r
 │  ├─ ex10.r
