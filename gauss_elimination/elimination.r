@@ -119,12 +119,23 @@ result <- function(A){
 
 
 # creating a augmented matrix (4x4 angular coeficients and 4x1 linear coeficients)
+# mat0 <- matrix(
+# 	c(
+# 		1, 2, 3, 1,
+# 		4, 5, 6, 2,
+# 		-8, 8, 9, 3
+# 	),nrow=3,ncol=4,byrow=TRUE
+# )
+
+# creating a augmented matrix (4x4 angular coeficients and 4x1 linear coeficients)
 mat0 <- matrix(
 	c(
-		1, 2, 3, 1,
-		4, 5, 6, 2,
-		-8, 8, 9, 3
-	),nrow=3,ncol=4,byrow=TRUE
+		2, 3, 3, 1, 1, 5,
+		5, 1, 1, 4, 3, 2,
+		4, 2, 2, 5, 3, 34,
+		3, 3, 4, 2, 4, 3,
+		4, 5, 4, 1, 5, 2
+	),nrow=5,ncol=6,byrow=TRUE
 )
 
 cat('\nInitial matrix:\n');print(mat0);cat('\n')
