@@ -7,9 +7,13 @@ argmax <- function(s){
 }
 
 swap <- function(A, x, y){
-	tmp <- A[[x]]
-	A[[x]] <- A[[y]]
-	A[[y]] <- tmp
+	cat('swap: x:',x,'y:',y,'\n')
+	print(A)
+	tmp <- A[x,]
+	A[x,] <- A[y,]
+	A[y,] <- tmp
+	print(A)
+	A
 }
 
 # seq wrapper
@@ -35,7 +39,7 @@ elimination <- function(A){
 		if(A[[i_max,j]] == 0)
 			j <- j + 1
 		else{
-			swap(A,i_max,i) # TODO: check this swap (isn't working)
+			A <- swap(A,i-1+i_max,i) # TODO: check this swap (isn't working)
 			for(h in seq(i+1,m,1)){
 				f <- A[[h,j]]/A[[i,j]]
 				A[[h,j]] <- 0
@@ -43,6 +47,7 @@ elimination <- function(A){
 					A[[h,k]] <- A[[h,k]] - A[[i,k]]*f
 				}
 			}
+			cat('\n')
 			print(A)
 			i <- i + 1
 			j <- j + 1
@@ -51,40 +56,13 @@ elimination <- function(A){
 	A
 }
 
-# result
-result <- function(A){
-	m <- nrow(A)
-	n <- ncol(A)
-	X <- matrix()
-	print(X)
-	cat('m:',m,'n:',n,'\n')
-	for(i in 1:m){
-		cat('i:',i,'\n')
-		X[[n-i]] <- A[[m-i+1,n]] # getting values from last column
-		print(A[[m-i+1,n]])
-		print(X[[n-i]])
-		for(j in 1:i){
-			cat('j:',j,'\n')
-			X[[n-i]] <- X[[n-i]] - A[[m-i+1,n-j]]*X[[n-j]]
-			print(A[[m-i+1,n-j]])
-			print(X[[n-i]])
-		}
-		X[[n-i]] <- X[[n-i]]/A[[m-i+1,n-i+1]]
-		print(A[[m-i+1,n-j]])
-		print(X[[n-i]])
-		print(X)
-		q()
-	}
-	X
-}
-
 result <- function(A){
 	m <- nrow(A)
 	n <- ncol(A)
 	X <- matrix()
 
 	for (i in m:1){
-		X[[i]] <- (A[[i,n]] - sum(A[i,m:(i+1)]*X[m:(i+1)]))
+		X[[i]] <- (A[[i,n]] - sum(A[i,sq(m,i,-1)]*X[sq(m,i,-1)]))/A[[i,i]]
 	}
 	X
 }
@@ -99,13 +77,11 @@ mat <- matrix(
 	),nrow=3,ncol=4,byrow=TRUE
 )
 
-print(sq(3,1,-1))
-print(sq(1,3,-1))
-print(sq(3,1,1))
-print(sq(1,3,1))
-
-# cat('Initial matrix:\n');print(mat);cat('\n\n')
-# mat <- elimination(mat)
-# cat('Eliminated matrix:\n');print(mat);cat('\n\n')
-# result(mat)
-# cat('Result matrix:\n');print(mat);cat('\n\n')
+cat('\nInitial matrix:\n');print(mat);cat('\n\n')
+mat <- elimination(mat)
+cat('\nEliminated matrix:\n');print(mat);cat('\n\n')
+xs <- result(mat)
+cat('\nResulting Xs:\n');
+for(i in 1:length(xs))
+	cat(sprintf('X%d = %+f\n',i,xs[[i]]))
+cat('\n\n')
