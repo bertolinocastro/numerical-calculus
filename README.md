@@ -20,6 +20,11 @@ Repository Tree:
 │  ├─ ex8.r
 │  ├─ ex9.r
 │  └─ exercises.jpeg
+├─ roots_iterative
+│  ├─ bissection.r
+│  ├─ fixed_point.r
+│  ├─ newton.r
+│  └─ secant.r
 └─ README.md
 ```
 
