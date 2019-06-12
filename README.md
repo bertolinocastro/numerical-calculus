@@ -3,6 +3,9 @@ Repository Tree:
 ```
 ├─ gauss_elimination
 │  └─ elimination.r
+├─ integration
+│  ├─ simpson.13.r
+│  └─ trapezium.r
 ├─ pure_R
 │  ├─ ex1.r
 │  ├─ ex10.r
